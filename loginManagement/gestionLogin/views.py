@@ -5,6 +5,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import AccessToken
 from datetime import datetime
+from .permissions import SoloAdministradorEnArea
 # Create your views here.
 
 
@@ -110,6 +111,7 @@ class LoginView(TokenObtainPairView):
 
 class LoginPerAreaView(generics.ListAPIView):
     serializer_class = RegistroLoginSerializer
+    permission_classes = [permissions.IsAuthenticated, SoloAdministradorEnArea]
 
     def get_queryset(self):
         area_id = self.kwargs['pk']
