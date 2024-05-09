@@ -36,6 +36,8 @@ class UsuarioModel(AbstractBaseUser, PermissionsMixin):
     apellido = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, unique=True, null=False)
     password = models.TextField(null=False)
+    cargo = models.ForeignKey(
+        to=CargosModel, on_delete=models.CASCADE, db_column="cargo_id", default=1)
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
